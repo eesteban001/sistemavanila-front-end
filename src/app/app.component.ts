@@ -11,6 +11,6 @@ export class AppComponent {
    
  ngOnInit(){}
  onSelect(){
-    this.router.navigate(['SistemaVanila']);
+    this.router.navigate(['inicioSesion']);
  }
 }

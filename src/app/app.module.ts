@@ -14,7 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms'
 
 
 const routes: Routes = [
-  { path: 'SistemaVanila', component: InicioSesionComponent },
+  { path: 'inicioSesion', component: InicioSesionComponent },
 ];
 
 @NgModule({
