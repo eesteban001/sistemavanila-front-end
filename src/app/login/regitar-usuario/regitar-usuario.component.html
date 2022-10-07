@@ -1,0 +1,33 @@
+<body>
+        <div class="registerBox">
+        <form [formGroup]="userForm">
+          <img [src]="imageSrc" class="user">
+          <h2>Registro Usuario</h2>
+            <mat-form-field appearance="fill">
+                <mat-label>Ingrese su Usuario</mat-label>
+                <input matInput formControlName="usuario">
+              </mat-form-field>
+                <mat-form-field appearance="fill">
+                  <mat-label>Ingrese su contraseña</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'" formControlName="contraseña">
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                  <mat-label>Ingrese su Nombre</mat-label>
+                  <input matInput formControlName="nombre">
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                  <mat-label>Ingrese su Apellido</mat-label>
+                  <input matInput formControlName="apellido">
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                  <mat-label>telefono</mat-label>
+                  <input matInput formControlName="telefono">
+                </mat-form-field>
+            <input type="submit" name="sumbit" value="REGISTRAR USUARIO" (click)="registrarUsuario()">
+            <input type="submit" name="sumbit" value="CERRAR" (click)="cerrar()">
+        </form>
+    </div>
+</body>

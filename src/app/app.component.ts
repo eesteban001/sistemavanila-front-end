@@ -9,8 +9,7 @@ import {Router} from '@angular/router';
 export class AppComponent {
   constructor(private router:Router) { }
    
- ngOnInit(){}
- onSelect(){
-    this.router.navigate(['inicioSesion']);
+ ngOnInit(){
+  this.router.navigate(['inicioSesion']);
  }
 }

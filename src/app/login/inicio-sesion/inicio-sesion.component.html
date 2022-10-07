@@ -1,6 +1,7 @@
 <body>
     <div class="loginBox">
         <img [src]="imageSrc" class="user">
+        <input type="submit" name="sumbit" value="VER CATALOGO" (click)="verCatalogo()">
         <h2>Inicio Sesion</h2>
         <form [formGroup]="userForm">
             <mat-form-field appearance="fill">
@@ -15,6 +16,7 @@
                   </button>
                 </mat-form-field>
             <input type="submit" name="sumbit" value="INICIAR SESION" (click)="inicioSesion()">
+            <input type="submit" name="sumbit" value="REGISTRARSE" (click)="registrarUsuario()">
         </form>
     </div>
 </body>

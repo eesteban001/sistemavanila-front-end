@@ -10,17 +10,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms'
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { RegitarUsuarioComponent } from './login/regitar-usuario/regitar-usuario.component'
+import { MatDialogModule } from '@angular/material/dialog';
+import { VisualizarComponent } from './catalogo/visualizar/visualizar.component';
 
 const routes: Routes = [
   { path: 'inicioSesion', component: InicioSesionComponent },
+  { path: 'catalogo', component: VisualizarComponent}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    InicioSesionComponent
+    InicioSesionComponent,
+    RegitarUsuarioComponent,
+    VisualizarComponent
   ],
   imports: [
     BrowserModule,
@@ -32,9 +37,11 @@ const routes: Routes = [
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

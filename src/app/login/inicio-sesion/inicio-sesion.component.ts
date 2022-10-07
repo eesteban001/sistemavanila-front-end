@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { servicios } from 'src/app/servicios/servicios.service';
+import { MatDialog } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { RegitarUsuarioComponent} from 'src/app/login/regitar-usuario/regitar-usuario.component';
 import Swal from 'sweetalert2';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -10,10 +13,13 @@ import Swal from 'sweetalert2';
 })
 export class InicioSesionComponent implements OnInit {
   hide = false;
-  imageSrc = 'assets/imagenes/logo.jpg';
+  imageSrc = 'assets/imagenes/logo2.jpg';
   parametro = '';
   userForm: FormGroup;
-  constructor(private servicios: servicios) { 
+  usuarios = {};
+  constructor(private servicios: servicios,
+    public dialog: MatDialog,
+    private router:Router) { 
     this.userForm = new FormGroup({
       usuario: new FormControl('', Validators.required),
       contraseña: new FormControl('', Validators.required)
@@ -26,7 +32,7 @@ export class InicioSesionComponent implements OnInit {
   public async inicioSesion(){
     const credenciales = this.userForm.value;
     this.parametro = credenciales.usuario;
-
+    this.usuarios = 0;
     this.servicios.ConsultaUsuario(this.parametro).subscribe((res) => {
       console.log('Res',res);
       console.log('Credenciales', credenciales);
@@ -48,4 +54,19 @@ export class InicioSesionComponent implements OnInit {
     //const usuarios: any = await this.servicios.ConsultaUsuario(this.usuario).toPromise();
     //console.log('Usuarios', usuarios);
   }
+
+  registrarUsuario(){
+      const dialogRef = this.dialog.open(RegitarUsuarioComponent, {
+        width: 'auto',
+        height: 'auto',
+        data: true,
+        disableClose: true
+      });
+  }
+
+  verCatalogo(){
+    this.router.navigate(['catalogo']);
+  }
+
+
 }
