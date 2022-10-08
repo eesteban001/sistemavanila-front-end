@@ -3,21 +3,35 @@
         <div class="container">
             <div class="row align-items-stretch justify-content-between">
                 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-                    <a class="navbar-brand" href="#">Helados Vanila</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-                        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+                    <ul class="nav">
+                    <li><a class="navbar-brand">Helados Vanila</a>
+                        <ul *ngIf="admin">
+                            <li><a (click)="pedidos()">PEDIDOS</a></li>
+                            <li><a (click)="reportePedidos()">REPORTE PEDIDOS</a></li>
+                            <li><a (Click)="reporteUsuarios()">REPORTE USUARIOS</a></li>
+                        </ul>
+                        <ul *ngIf="logueado">
+                            <li><a (click)="pedidos()">PEDIDOS REALIZADOS</a></li>
+                        </ul>
+                    </li>
+                </ul>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <ul class="navbar-nav mr-auto">
+                            <ul class="nav">
                             <li class="nav-item dropdown">
-                                <img src="assets/imagenes/carrito.png" class="nav-link dropdown-toggle img-fluid" height="70px"
+                                <img src="assets/imagenes/logo2.jpg" class="nav-link dropdown-toggle img-fluid" height="70px"
                                     width="70px" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
+                                    <ul *ngIf="logueado">
+                                        <li *ngFor="let car of carrito; let i = index" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; background-color: aqua; padding: 20px; margin:10px 50px; width:150px;">{{car.nombre}} Q.{{car.precio}}<img [src]="ruta+car.imagen" class="card-img-top"><a (click)="eliminar(i)" style="text-align: center;"><mat-icon>close</mat-icon></a></li>
+                                        <a *ngIf="carrito != '' " class="boton" target="_blank" style="background-color: aqua;">COMPRAR</a>
+                                    </ul>
                             </li>
                         </ul>
+                        </ul>
                     </div>
-                    <a class="navbar-brand" href="#">Regresar</a>
+                    <a *ngIf="!logueado" class="navbar-brand" href="#">Regresar</a>
+                    <a *ngIf="logueado" class="navbar-brand" href="#">Cerrar Sesion</a>
                 </nav>
             </div>
         </div>
@@ -38,9 +52,9 @@
                         <h4 class="my-0 font-weight-bold">{{producto.nombre}}</h4>
                     </div>
                     <div class="card-body">
-                        <img src="assets/imagenes/mora.jpg" class="card-img-top">
+                        <img [src]="ruta+producto.imagen" class="card-img-top">
                         <h1 class="card-title pricing-card-title precio">Q. <span class="">{{producto.precio}}</span></h1>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="1">Comprar</a>
+                        <a (click)="comprar(producto)" class="btn btn-block btn-primary agregar-carrito" data-id="1">Agregar</a>
                     </div>
                 </div>
             </div>

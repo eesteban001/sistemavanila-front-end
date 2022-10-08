@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { servicios } from 'src/app/servicios/servicios.service';
+import { variables } from 'src/app/servicios/variables';
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RegitarUsuarioComponent} from 'src/app/login/regitar-usuario/regitar-usuario.component';
@@ -19,7 +20,8 @@ export class InicioSesionComponent implements OnInit {
   usuarios = {};
   constructor(private servicios: servicios,
     public dialog: MatDialog,
-    private router:Router) { 
+    private router:Router,
+    private variable: variables) { 
     this.userForm = new FormGroup({
       usuario: new FormControl('', Validators.required),
       contraseña: new FormControl('', Validators.required)
@@ -45,14 +47,22 @@ export class InicioSesionComponent implements OnInit {
       }
       if(credenciales.usuario == res.usuario && credenciales.contraseña == res.contraseña){
         Swal.fire({
-          html: "<p>Las credenciales ingresadas son validas</p>",
-          icon: 'success'
+          title: 'Heladeria Vanila',
+          text: 'Bienvenido a heladeria Vanila',
+          width: 300,
+          imageUrl: 'assets/imagenes/logo2.jpg',
+          imageWidth: 200,
+          imageHeight: 200,
+          imageAlt: 'Custom image',
+          timer: 2000,   
+          showConfirmButton: false
         })
-        return;
+        this.variable.usuarioLogueado = res.usuario;
+        this.variable.logueado = true;
+        this.variable.rol = res.rol;
+        this.router.navigate(['catalogo']);
       }
     });
-    //const usuarios: any = await this.servicios.ConsultaUsuario(this.usuario).toPromise();
-    //console.log('Usuarios', usuarios);
   }
 
   registrarUsuario(){

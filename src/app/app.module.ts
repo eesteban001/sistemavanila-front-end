@@ -14,6 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RegitarUsuarioComponent } from './login/regitar-usuario/regitar-usuario.component'
 import { MatDialogModule } from '@angular/material/dialog';
 import { VisualizarComponent } from './catalogo/visualizar/visualizar.component';
+import { variables } from 'src/app/servicios/variables';
+import { servicios } from 'src/app/servicios/servicios.service';
 
 const routes: Routes = [
   { path: 'inicioSesion', component: InicioSesionComponent },
@@ -25,7 +27,7 @@ const routes: Routes = [
     AppComponent,
     InicioSesionComponent,
     RegitarUsuarioComponent,
-    VisualizarComponent
+    VisualizarComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,9 +40,11 @@ const routes: Routes = [
     MatIconModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   providers: [
+    servicios,
+    variables
   ],
   bootstrap: [AppComponent]
 })

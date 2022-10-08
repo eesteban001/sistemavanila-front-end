@@ -1,1 +1,57 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.css");
+.nav > li {
+    float:left;
+}
+
+.nav li a {
+    background-color:rgba(0, 184, 197, 0);
+    color:rgb(179, 40, 221);
+    text-decoration:none;
+    padding:10px 12px;
+    display:block;
+}
+
+.nav li a:hover {
+    background-color:#2fcfff;
+}
+
+.nav li ul {
+    display:none;
+    position:absolute;
+    min-width:140px;
+}
+
+.nav li:hover > ul {
+    display:block;
+}
+
+.nav li ul li {
+    position:relative;
+}
+
+.nav li ul li ul {
+    right:-140px;
+    top:0px;
+}
+
+.nav li h4{
+    text-decoration: none;
+    background-color: #2fcfff;
+}
+.boton {
+    border: 1px solid #2e518b; 
+    padding: 10px; 
+    background-color: #2e518b; 
+    color: #ffffff; 
+    text-decoration: none;
+    text-transform: uppercase; 
+    text-align: center;
+    font-family: 'Helvetica', sans-serif; 
+    border-radius: 50px; 
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    }
+
+.carrito{
+    height: 100px;
+    width: 400px;
+}
