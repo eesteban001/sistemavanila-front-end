@@ -1,0 +1,18 @@
+<div class="detalleBox">
+    <thead>
+        <tr class="table-primary">
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio por Unidad</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let detalle of detalleSolicitud" style="background-color: rgb(0, 171, 177); text-align: center;">
+            <td>{{detalle.producto}}</td>
+            <td>{{detalle.cantidad}}</td>
+            <td>Q.{{detalle.precio}}</td>
+        </tr>
+    </tbody>
+    <input type="submit" name="sumbit" value="CERRAR" (click)="cerrar()">
+
+</div>

@@ -1,0 +1,54 @@
+<body>
+    <div class="direccionBox">
+        <h2 style="color: white">Seleccionar Direccion</h2>
+        <div class="table" *ngIf="verTabla">
+        <thead>
+            <tr class="table-primary">
+                <th>Seleccionar</th>
+                <th>Direccion</th>
+                <th>Municipio</th>
+                <th>Departamento</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let direccion of direcciones" style="background-color: rgb(0, 0, 0); text-align: center;">
+                <td><mat-checkbox class="example-margin" (change)="seleccion(direccion, $event.checked)"></mat-checkbox></td>
+                <td>{{direccion.nombre}}</td>
+                <td>{{direccion.municipio}}</td>
+                <td>{{direccion.departamento}}</td>
+            </tr>
+        </tbody>
+    </div>
+        <br>
+        <br>
+        <br>
+    <form [formGroup]="direccionForm">
+            <mat-form-field appearance="fill" ng-change="validar()">
+                <mat-label>Departamento</mat-label>
+                <mat-select formControlName="departamento" (selectionChange)="habilitar($event.value)" required>
+                <mat-option *ngFor="let data of departamentos" [value]="data.id">
+                    {{ data.nombre}}
+                </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Municipio</mat-label>
+                <mat-select formControlName="municipio" required>
+                <mat-option *ngFor="let data of municipios" [value]="data.id" [disabled]="data == null">
+                    {{ data.nombre}}
+                </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+              <mat-label>Descripcion</mat-label>
+              <input matInput formControlName="nombre">
+            </mat-form-field>
+            <br>
+        <input type="submit" name="sumbit" value="Registrar Direcion" (click)="registrarDireccion()" [disabled]="!this.direccionForm.valid">
+        <br>
+        <input class="btn btn-block btn-primary agregar-carrito" value="Hecho" (click)="registrarPedido()" [disabled]="!selecciono">
+    </form>
+</div>
+</body>

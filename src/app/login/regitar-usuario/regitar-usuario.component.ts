@@ -63,11 +63,28 @@ export class RegitarUsuarioComponent implements OnInit {
       })
       return;
     }if(this.ingresarUsuario == true){
+      let registro;
       const registroUsuario: any = await this.servicios.postRegistrarUsuario(bodyPost).toPromise();
       console.log('creado', registroUsuario);
-
-
+      if(registroUsuario != null){
+        registro = true;
+      }
+      if(registro == true){
+        Swal.fire({
+          html: "<p>Su usuario fue creado correctamente</p>",
+          icon: 'success'
+        })
+        this.cerrar();
+      }else{
+        Swal.fire({
+          html: "<p>Ocurrio un problema, contacte con el administrador</p>",
+          icon: 'success'
+        })
+        this.cerrar();
+      }
     }
+
+
   }
   
   cerrar(){

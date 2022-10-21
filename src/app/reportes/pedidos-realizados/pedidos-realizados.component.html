@@ -6,12 +6,12 @@
                     <ul class="nav">
                     <li><a class="navbar-brand">Helados Vanila</a>
                         <ul *ngIf="rol == 'cliente'">
-                            <li><a (click)="pedidosCliente()">PEDIDOS REALIZADOS</a></li>
+                            <li><a (click)="pedidosCliente()">VISUALIZAR CATALAGO</a></li>
                         </ul>
                         <ul *ngIf="rol == 'admin'">
                             <li><a (click)="reportePedidos()">PEDIDOS COMPLETADOS</a></li>
-                            <li><a (click)="pedidos()">PEDIDOS ACTIVOS</a></li>
                             <li><a (click)="reporteUsuarios()">REPORTE USUARIOS</a></li>
+                            <li><a (click)="pedidos()">PEDIDOS ACTIVOS</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -22,10 +22,6 @@
                                 <img src="assets/imagenes/logo2.jpg" class="nav-link dropdown-toggle img-fluid" height="70px"
                                     width="70px" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
-                                    <ul *ngIf="logueado">
-                                        <li *ngFor="let car of carrito; let i = index" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; background-color: aqua; padding: 5px; margin:1px 1px; width:100px;">{{car.nombre}} <br> Total: Q.{{car.total}} <br> Cantidad:{{car.cantidad}} <br> <img [src]="ruta+car.imagen" class="card-img-top"><a (click)="eliminar(i)" style="text-align: center;"><mat-icon>close</mat-icon></a></li>
-                                        <a *ngIf="carrito != '' " class="boton" target="_blank" style="background-color: aqua;" (click)="realizarCompra()">COMPRAR</a>
-                                    </ul>
                             </li>
                             </ul>
                         </ul>
@@ -39,22 +35,39 @@
 
     <main>
         <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 my-4 mx-auto text-center">
-            <h1 class="display-4 mt-4">Elije Tu Producto</h1>
-            <p class="lead">Un sabor Adorable</p>
+            <h1 class="display-4 mt-4">Reporte Solicitudes</h1>
         </div>
 
         <div class="container" id="lista-productos">
             
             <div class="card-deck mb-3 text-center">
                 
-                <div *ngFor="let producto of productos" class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">{{producto.nombre}}</h4>
-                    </div>
-                    <div class="card-body">
-                        <img [src]="ruta+producto.imagen" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio">Q. <span class="">{{producto.precio}}</span></h1>
-                        <a (click)="comprar(producto)" class="btn btn-block btn-primary agregar-carrito" data-id="1">Agregar</a>
+                <div class="card mb-4 shadow-sm">
+                    <div class="table">
+                        <thead>
+                            <tr class="table-primary">
+                                <th>Numero Gestion</th>
+                                <th>Fecha Solicitud</th>
+                                <th>Total</th>
+                                <th>Direccion</th>
+                                <th>Municipio</th>
+                                <th>Departamento</th>
+                                <th>Estado</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let solicitud of solicitudes" style="background-color: rgb(255, 255, 255); text-align: center;">
+                                <td>{{solicitud.numerogestion}}</td>
+                                <td>{{parseDate(solicitud.fecha_solicitud)}}</td>
+                                <td>Q.{{solicitud.total}}</td>
+                                <td>{{solicitud.descripcion}}</td>
+                                <td>{{solicitud.municipio}}</td>
+                                <td>{{solicitud.departamento}}</td>
+                                <td>{{solicitud.estado}}</td>
+                                <td><a class="btn btn-block btn-primary agregar-carrito"(click)="detalle(solicitud)">Detalle</a></td>
+                            </tr>
+                        </tbody>
                     </div>
                 </div>
             </div>
@@ -62,3 +75,4 @@
 
     </main>
 </body>
+

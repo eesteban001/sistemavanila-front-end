@@ -1,0 +1,80 @@
+<body> 
+    <header>
+        <div class="container">
+            <div class="row align-items-stretch justify-content-between">
+                <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                    <ul class="nav">
+                    <li><a class="navbar-brand">Helados Vanila</a>
+                        <ul *ngIf="rol == 'admin'">
+                            <li><a (click)="reportePedidos()">PEDIDOS COMPLETADOS</a></li>
+                            <li><a (click)="reporteUsuarios()">REPORTE USUARIOS</a></li>
+                            <li><a (click)="verCatalogo()">VISUALIZAR CATALOGO</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="navbar-nav mr-auto">
+                            <ul class="nav">
+                            <li class="nav-item dropdown">
+                                <img src="assets/imagenes/logo2.jpg" class="nav-link dropdown-toggle img-fluid" height="70px"
+                                    width="70px" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                            </li>
+                            </ul>
+                        </ul>
+                    </div>
+                    <a *ngIf="!logueado" class="navbar-brand" href="#">Regresar</a>
+                    <a *ngIf="logueado" class="navbar-brand" href="#">Cerrar Sesion</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 my-4 mx-auto text-center">
+            <h1 class="display-4 mt-4">SOLICITUDES</h1>
+        </div>
+
+        <div class="container" id="lista-productos">
+            
+            <div class="card-deck mb-3 text-center">
+                
+                <div class="card mb-4 shadow-sm">
+                    <div class="table">
+                        <thead>
+                            <tr class="table-primary">
+                                <th>Numero Gestion</th>
+                                <th>Fecha Solicitud</th>
+                                <th>Total</th>
+                                <th>Aplica Oferta</th>
+                                <th>Direccion</th>
+                                <th>Municipio</th>
+                                <th>Departamento</th>
+                                <th>Usuario Solicitante</th>
+                                <th>Estado</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let solicitud of solicitudesActivas" style="background-color: rgb(255, 255, 255); text-align: center;">
+                                <td>{{solicitud.numerogestion}}</td>
+                                <td>{{parseDate(solicitud.fecha_solicitud)}}</td>
+                                <td>Q.{{solicitud.total}}</td>
+                                <td>{{oferta(solicitud.aplica_oferta)}}</td>
+                                <td>{{solicitud.descripcion}}</td>
+                                <td>{{solicitud.municipio}}</td>
+                                <td>{{solicitud.departamento}}</td>
+                                <td>{{solicitud.usuario}}</td>
+                                <td>{{solicitud.estado}}</td>
+                                <td *ngIf="solicitud.estado == 'Activo'"><a class="btn btn-block btn-primary agregar-carrito"(click)="asignar(solicitud)">Asignar</a></td>
+                                <td *ngIf="solicitud.estado == 'En proceso'"><a class="btn btn-block btn-primary agregar-carrito"(click)="revisar(solicitud)">Revisar</a></td>
+                            </tr>
+                        </tbody>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</body>
+

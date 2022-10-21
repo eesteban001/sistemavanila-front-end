@@ -18,6 +18,7 @@ export class InicioSesionComponent implements OnInit {
   parametro = '';
   userForm: FormGroup;
   usuarios = {};
+  numeroGestion: any;
   constructor(private servicios: servicios,
     public dialog: MatDialog,
     private router:Router,

@@ -1,0 +1,35 @@
+.detalleBox
+	{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%,-50%);
+		width: 400px;
+		height: 400px;
+		padding: 80px 30px;
+		box-sizing: border-box;
+		background: #ab00c2;
+	}
+
+	td, th{
+		text-align: center;
+		padding: 10px 10px;
+		color: rgb(0, 0, 0);
+	}
+
+	.detalleBox input[type="submit"]
+	{
+		border: none;
+		outline: none;
+		height: 40px;
+		color: #fff;
+		font-size: 16px;
+		background: rgb(0, 171, 177);
+		cursor: pointer;
+		border-radius: 20px;
+	}
+.detalleBox input[type="submit"]:hover
+	{
+		background: #1a59a5;
+		color: #ffffff;;
+	}

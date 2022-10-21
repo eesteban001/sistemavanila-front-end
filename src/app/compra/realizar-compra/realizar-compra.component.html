@@ -1,0 +1,64 @@
+<body> 
+    <header>
+        <div class="container">
+            <div class="row align-items-stretch justify-content-between">
+                <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                    <ul class="nav">
+                        <li><a class="navbar-brand">Helados Vanila</a>
+                            <ul *ngIf="rol == 'cliente'">
+                                <li><a (click)="pedidosCliente()">PEDIDOS REALIZADOS</a></li>
+                            </ul>
+                            <ul *ngIf="rol == 'admin'">
+                            <li><a (click)="reportePedidos()">PEDIDOS COMPLETADOS</a></li>
+                            <li><a (click)="reporteUsuarios()">REPORTE USUARIOS</a></li>
+                            <li><a (click)="pedidos()">PEDIDOS ACTIVOS</a></li>
+                            </ul>
+                        </li>
+                </ul>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="navbar-nav mr-auto">
+                            <ul class="nav">
+                            <li class="nav-item dropdown">
+                                <img src="assets/imagenes/logo2.jpg" class="nav-link dropdown-toggle img-fluid" height="70px"
+                                    width="70px" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                            </li>
+                        </ul>
+                        </ul>
+                    </div>
+                    <a *ngIf="!logueado" class="navbar-brand" href="#">Regresar</a>
+                    <a *ngIf="logueado" class="navbar-brand" href="#">Cerrar Sesion</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 my-4 mx-auto text-center">
+            <h1 class="display-4 mt-4">Realiza tu compra</h1>
+            <p class="lead">Gracias por elegirnos</p>
+            <h1 class="display-4 mt-4">Total de Pedido: Q.{{total}}</h1>
+        </div>
+
+        <div class="container" id="lista-productos">
+            
+            <div class="card-deck mb-3 text-center">
+                
+                <div *ngFor="let carrito of carrito; let i = index" class="card mb-4 shadow-sm">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-bold">{{carrito.nombre}}</h4>
+                    </div>
+                    <div class="card-body">
+                        <img [src]="ruta+carrito.imagen" class="card-img-top">
+                        <h1 class="card-title pricing-card-title precio"><span class="">Cantidad: {{carrito.cantidad}}<br> total por producto:<br>Q.{{carrito.total}}</span></h1>
+                        <a (click)="agregar(i)" class="btn btn-block btn-primary agregar-carrito">Agregar</a>
+                        <a (click)="eliminar(i)" class="btn btn-block btn-primary eliminar-carrito" style="background-color: red; color:white">Eliminar</a>
+                    </div>
+                </div>
+                <a class="btn btn-block btn-primary agregar-carrito" (click)="registrarPedido()">Realizar Pedido</a>
+            </div>
+        </div>
+
+    </main>
+</body>
+
