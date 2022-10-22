@@ -44,17 +44,17 @@ export class servicios {
 
     public ConsultaMunicipioByDepartamento(id: number): Observable<any>{
         //return this.http.get<any>(`http://localhost:8010/municipio/municipios/${id}`);
-        return this.http.get<any>(`https://sistemavanila-ms.azurewebsites.net/producto/consultar`);
+        return this.http.get<any>(`https://sistemavanila-ms.azurewebsites.net/municipio/municipios/${id}`);
     }
 
     public postRegistrarSolicitud(body: any) {
         //return this.http.post<any>(`http://localhost:8010/solicitud/agregar`, body);
-        return this.http.post<any>(`https://sistemavanila-ms.azurewebsites.net/direccion/agregar`, body);
+        return this.http.post<any>(`https://sistemavanila-ms.azurewebsites.net/solicitud/agregar`, body);
     }
 
     public postRegistrarProductosSolicitud(body: any) {
         //return this.http.post<any>(`http://localhost:8010/producto-solicitado/agregar`, body);
-        return this.http.post<any>(`https://sistemavanila-ms.azurewebsites.net/direccion/agregar`, body);
+        return this.http.post<any>(`https://sistemavanila-ms.azurewebsites.net/producto-solicitado/agregar`, body);
     }
 
     public getNumeroGestion(): Observable<any>{

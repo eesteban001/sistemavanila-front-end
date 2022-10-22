@@ -25,6 +25,7 @@ import { PedidosRealizadosComponent } from './reportes/pedidos-realizados/pedido
 import { DetalleSolicitudComponent } from './reportes/detalle-solicitud/detalle-solicitud.component';
 import { PedidosActivosComponent } from './reportes/pedidos-activos/pedidos-activos.component';
 import { UsuariosComponent } from 'src/app/reportes/usuarios/usuarios.component';
+import { SolicitudComponent } from './revisar/solicitud/solicitud.component';
 
 const routes: Routes = [
   { path: 'inicioSesion', component: InicioSesionComponent },
@@ -47,6 +48,7 @@ const routes: Routes = [
     DetalleSolicitudComponent,
     PedidosActivosComponent,
     UsuariosComponent,
+    SolicitudComponent,
   ],
   imports: [
     BrowserModule,

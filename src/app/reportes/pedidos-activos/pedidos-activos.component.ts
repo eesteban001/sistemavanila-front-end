@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import {Router} from '@angular/router';
 import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
+import { SolicitudComponent} from 'src/app/revisar/solicitud/solicitud.component';
 
 @Component({
   selector: 'app-pedidos-activos',
@@ -48,7 +49,13 @@ export class PedidosActivosComponent implements OnInit {
   }
 
   asignar(data:any){
-    
+    console.log(data);
+    const dialogRef = this.dialog.open(SolicitudComponent, {
+      width: 'auto',
+      height: 'auto',
+      data: data,
+      disableClose: true
+    });
   }
 
   revisar(data: any){
@@ -69,7 +76,7 @@ export class PedidosActivosComponent implements OnInit {
       return no;
     }
     else{ 
-      return no;
+      return si;
     }
   }
 
