@@ -1,56 +1,42 @@
 import { Component, OnInit } from '@angular/core';
 import { variables } from 'src/app/servicios/variables';
 import { servicios } from 'src/app/servicios/servicios.service';
-import * as moment from 'moment';
 import {Router} from '@angular/router';
-import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
+import * as moment from 'moment';
 import { DetalleSolicitudComponent} from 'src/app/reportes/detalle-solicitud/detalle-solicitud.component';
 
 @Component({
-  selector: 'app-pedidos-realizados',
-  templateUrl: './pedidos-realizados.component.html',
-  styleUrls: ['./pedidos-realizados.component.css']
+  selector: 'app-completados',
+  templateUrl: './completados.component.html',
+  styleUrls: ['./completados.component.css']
 })
-
-export class PedidosRealizadosComponent implements OnInit {
+export class CompletadosComponent implements OnInit {
+  solicitudesCompletadas: any;
   rol = this.variables.rol;
   logueado = false;
-  solicitudes: any  = [];
   constructor(private servicios: servicios,
     private variables: variables,
     private router:Router,
-    public dialog: MatDialog,
-  ) { }
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.logueado = this.variables.logueado;
-    this.solicitudes = this.servicios.ReportePedidosByUsuario(this.variables.usuarioLogueado).subscribe((res) => {
-    console.log(res);
-    this.solicitudes = res;
+    this.servicios.ReporteCompletados().subscribe((res) => {
+      console.log(res);
+      this.solicitudesCompletadas = res;
     });
-    if(this.solicitudes == null){
-      Swal.fire({
-        html: "<p>Su usuario no cuenta con solicitudes realizadas</p>",
-        icon: 'warning'
-      });
-      this.router.navigate(['catalogo']);
-    }
-  }
-
-  pedidosCliente(){
-    this.router.navigate(['catalogo']);
-  }
-
-  reportePedidos(){
-    this.router.navigate(['pedidos/completados']);
   }
 
   reporteUsuarios(){
     this.router.navigate(['reporteUsuarios']);
   }
 
-  pedidos(){
+  verCatalogo(){
+    this.router.navigate(['catalogo']);
+  }
+
+  pedidosActivos(){
     this.router.navigate(['pedidos/activos']);
   }
 
@@ -60,7 +46,19 @@ export class PedidosRealizadosComponent implements OnInit {
     return fecha; 
   }
 
-  detalle(data:any){
+  oferta(data:any){
+    const si = 'SI';
+    const no = 'NO';
+
+    if(data == false){
+      return no;
+    }
+    else{ 
+      return si;
+    }
+  }
+
+  detalle(data: any){
     console.log(data);
     const dialogRef = this.dialog.open(DetalleSolicitudComponent, {
       width: 'auto',
@@ -69,5 +67,5 @@ export class PedidosRealizadosComponent implements OnInit {
       disableClose: true
     });
   }
-  
+
 }

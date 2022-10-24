@@ -16,6 +16,8 @@ export class PedidosActivosComponent implements OnInit {
   solicitudesActivas: any;
   rol = this.variables.rol;
   logueado = false;
+  solicitud: any;
+  verTabla = true;
   constructor(private servicios: servicios,
     private variables: variables,
     private router:Router,
@@ -41,7 +43,7 @@ export class PedidosActivosComponent implements OnInit {
   }
 
   reportePedidos(){
-
+    this.router.navigate(['pedidos/completados']);
   }
 
   reporteUsuarios(){
@@ -50,6 +52,11 @@ export class PedidosActivosComponent implements OnInit {
 
   asignar(data:any){
     console.log(data);
+    this.servicios.ConsultarSolicitud(data.numerogestion).subscribe((res) => {
+      this.solicitud = res;
+      console.log(this.solicitud);
+      this.asignarSolicitud();
+    });
     const dialogRef = this.dialog.open(SolicitudComponent, {
       width: 'auto',
       height: 'auto',
@@ -59,7 +66,13 @@ export class PedidosActivosComponent implements OnInit {
   }
 
   revisar(data: any){
-
+    console.log(data);
+    const dialogRef = this.dialog.open(SolicitudComponent, {
+      width: 'auto',
+      height: 'auto',
+      data: data,
+      disableClose: true
+    });
   }
 
   parseDate(data: any){
@@ -78,6 +91,34 @@ export class PedidosActivosComponent implements OnInit {
     else{ 
       return si;
     }
+  }
+
+  asignarSolicitud(){
+    const bodyAsignar = {
+      aplica_oferta: this.solicitud.aplica_oferta,
+      direccion: this.solicitud.direccion,
+      estado: 3,
+      fecha_solicitud: this.solicitud.fecha_solicitud,
+      numerogestion: this.solicitud.numerogestion,
+      total: this.solicitud.total,
+      usuario: this.solicitud.usuario
+    }
+    console.log(bodyAsignar);
+    this.servicios.putActualizarSolicitud(bodyAsignar).subscribe((res) => {
+    console.log(res);
+    if(res!=null){
+      this.actualizarTabla();
+    }
+    });
+  }
+
+  actualizarTabla(){
+    this.verTabla = false;
+    this.servicios.ReporteSolicitudesActivas().subscribe((res) => {
+      this.solicitudesActivas = res;
+      console.log(this.solicitudesActivas);
+    });
+    this.verTabla = true;
   }
 
 }

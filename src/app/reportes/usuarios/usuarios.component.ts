@@ -29,7 +29,7 @@ export class UsuariosComponent implements OnInit {
 
 
   reportePedidos(){
-
+    this.router.navigate(['pedidos/completados']);
   }
 
   pedidos(){

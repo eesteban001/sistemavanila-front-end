@@ -6,7 +6,7 @@
                     <ul class="nav">
                     <li><a class="navbar-brand">Helados Vanila</a>
                         <ul *ngIf="rol == 'admin'">
-                            <li><a (click)="reportePedidos()">PEDIDOS COMPLETADOS</a></li>
+                            <li><a (click)="pedidosActivos()">PEDIDOS ACTIVOS</a></li>
                             <li><a (click)="reporteUsuarios()">REPORTE USUARIOS</a></li>
                             <li><a (click)="verCatalogo()">VISUALIZAR CATALOGO</a></li>
                         </ul>
@@ -40,7 +40,7 @@
             <div class="card-deck mb-3 text-center">
                 
                 <div class="card mb-4 shadow-sm" style="align-self: absolute; position:absolute">
-                    <div class="table" *ngIf="verTabla">
+                    <div class="table">
                         <thead>
                             <tr class="table-primary">
                                 <th>Numero Gestion</th>
@@ -51,12 +51,11 @@
                                 <th>Municipio</th>
                                 <th>Departamento</th>
                                 <th>Usuario Solicitante</th>
-                                <th>Estado</th>
                                 <th>Acción</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let solicitud of solicitudesActivas" style="background-color: rgb(255, 255, 255); text-align: center;">
+                            <tr *ngFor="let solicitud of solicitudesCompletadas" style="background-color: rgb(255, 255, 255); text-align: center;">
                                 <td>{{solicitud.numerogestion}}</td>
                                 <td>{{parseDate(solicitud.fecha_solicitud)}}</td>
                                 <td>Q.{{solicitud.total}}</td>
@@ -65,9 +64,7 @@
                                 <td>{{solicitud.municipio}}</td>
                                 <td>{{solicitud.departamento}}</td>
                                 <td>{{solicitud.usuario}}</td>
-                                <td>{{solicitud.estado}}</td>
-                                <td *ngIf="solicitud.estado == 'Activo'"><a class="btn btn-block btn-primary agregar-carrito"(click)="asignar(solicitud)">Asignar</a></td>
-                                <td *ngIf="solicitud.estado == 'En proceso'"><a class="btn btn-block btn-primary agregar-carrito"(click)="revisar(solicitud)">Revisar</a></td>
+                                <td><a class="btn btn-block btn-primary agregar-carrito"(click)="detalle(solicitud)">Detalle</a></td>
                             </tr>
                         </tbody>
                     </div>

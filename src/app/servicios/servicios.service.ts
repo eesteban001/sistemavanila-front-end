@@ -8,78 +8,76 @@ import { Observable } from 'rxjs';
 
 export class servicios {
 
-
+    local = 'http://localhost:8010'
+    azure = 'https://sistemavanila-ms.azurewebsites.net'
     constructor(private http: HttpClient) {
     }
 
     public ConsultaUsuario(usuario: string): Observable<any>{
-        //return this.http.get<any>(`http://localhost:8010/usuario/consultar-usuario/${usuario}`);
-        return this.http.get<any>(`https://sistemavanila-ms.azurewebsites.net/usuario/consultar-usuario/${usuario}`);
+        return this.http.get<any>(`${this.azure}/usuario/consultar-usuario/${usuario}`);
     }
 
     public postRegistrarUsuario(body: any) {
-        //return this.http.post<any>(`http://localhost:8010/usuario/agregar`, body);
-        return this.http.post<any>(`https://sistemavanila-ms.azurewebsites.net/usuario/agregar`, body);
+        return this.http.post<any>(`${this.azure}/usuario/agregar`, body);
     }
 
     public ConsultaAllProducto(): Observable<any>{
-        //return this.http.get<any>(`http://localhost:8010/producto/consultar`);
-        return this.http.get<any>(`https://sistemavanila-ms.azurewebsites.net/producto/consultar`);
+        return this.http.get<any>(`${this.azure}/producto/consultar`);
     }
 
     public ConsultaDireccionesByUsuario(usuario: string): Observable<any>{
-        //return this.http.get<any>(`http://localhost:8010/direccion/direccion/${usuario}`);
-        return this.http.get<any>(`https://sistemavanila-ms.azurewebsites.net/direccion/direccion/${usuario}`);
+        return this.http.get<any>(`${this.azure}/direccion/direccion/${usuario}`);
     }
 
     public postRegistrarDireccion(body: any) {
-        //return this.http.post<any>(`http://localhost:8010/direccion/agregar`, body);
-        return this.http.post<any>(`https://sistemavanila-ms.azurewebsites.net/direccion/agregar`, body);
+        return this.http.post<any>(`${this.azure}/direccion/agregar`, body);
     }
 
     public ConsultaAllDepartamentos(): Observable<any>{
-        //return this.http.get<any>(`http://localhost:8010/departamento/consultar`);
-        return this.http.get<any>(`https://sistemavanila-ms.azurewebsites.net/departamento/consultar`);
+        return this.http.get<any>(`${this.azure}/departamento/consultar`);
     }
 
     public ConsultaMunicipioByDepartamento(id: number): Observable<any>{
-        //return this.http.get<any>(`http://localhost:8010/municipio/municipios/${id}`);
-        return this.http.get<any>(`https://sistemavanila-ms.azurewebsites.net/municipio/municipios/${id}`);
+        return this.http.get<any>(`${this.azure}/municipio/municipios/${id}`);
     }
 
     public postRegistrarSolicitud(body: any) {
-        //return this.http.post<any>(`http://localhost:8010/solicitud/agregar`, body);
-        return this.http.post<any>(`https://sistemavanila-ms.azurewebsites.net/solicitud/agregar`, body);
+        return this.http.post<any>(`${this.azure}/solicitud/agregar`, body);
     }
 
     public postRegistrarProductosSolicitud(body: any) {
-        //return this.http.post<any>(`http://localhost:8010/producto-solicitado/agregar`, body);
-        return this.http.post<any>(`https://sistemavanila-ms.azurewebsites.net/producto-solicitado/agregar`, body);
+        return this.http.post<any>(`${this.azure}/producto-solicitado/agregar`, body);
     }
 
     public getNumeroGestion(): Observable<any>{
-        //return this.http.get<any>(`http://localhost:8010/solicitud/numeroGestion`);
-        return this.http.get<any>(`https://sistemavanila-ms.azurewebsites.net/solicitud/numeroGestion`);
+        return this.http.get<any>(`${this.azure}/solicitud/numeroGestion`);
     }
 
     public ReportePedidosByUsuario(usuario: string): Observable<any>{
-        //return this.http.get<any>(`http://localhost:8010/reportes/reporte-pedidos/${usuario}`);
-        return this.http.get<any>(`https://sistemavanila-ms.azurewebsites.net/reportes/reporte-pedidos/${usuario}`);
+        return this.http.get<any>(`${this.azure}/reportes/reporte-pedidos/${usuario}`);
     }
 
     public DetalleSolicitud(numerogestion: number): Observable<any>{
-        //return this.http.get<any>(`http://localhost:8010/reportes/detalle-solicitud/${numerogestion}`);
-        return this.http.get<any>(`https://sistemavanila-ms.azurewebsites.net/reportes/detalle-solicitud/${numerogestion}`);
+        return this.http.get<any>(`${this.azure}/reportes/detalle-solicitud/${numerogestion}`);
     }
 
     public ReporteSolicitudesActivas(): Observable<any>{
-        //return this.http.get<any>(`http://localhost:8010/reportes/reporte-solicitudes-activas`);
-        return this.http.get<any>(`https://sistemavanila-ms.azurewebsites.net/reportes/reporte-solicitudes-activas`);
+        return this.http.get<any>(`${this.azure}/reportes/reporte-solicitudes-activas`);
     }
 
     public ReporteUsuarios(): Observable<any>{
-        //return this.http.get<any>(`http://localhost:8010/reportes/reporte-usuarios`);
-        return this.http.get<any>(`https://sistemavanila-ms.azurewebsites.net/reportes/reporte-usuarios`);
+        return this.http.get<any>(`${this.azure}/reportes/reporte-usuarios`);
     }
     
+    public ReporteCompletados(): Observable<any>{
+        return this.http.get<any>(`${this.azure}/reportes/reporte-completados`);
+    }
+
+    public putActualizarSolicitud(body: any) {
+        return this.http.put<any>(`${this.azure}/solicitud/actualizar`, body);
+    } 
+
+    public ConsultarSolicitud(numerogestion: any): Observable<any>{
+        return this.http.get<any>(`${this.azure}/solicitud/consultar-solicitud/${numerogestion}`);
+    }
 }

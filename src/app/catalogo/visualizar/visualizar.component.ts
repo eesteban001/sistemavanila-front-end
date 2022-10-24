@@ -115,7 +115,7 @@ export class VisualizarComponent implements OnInit {
   }
 
   reportePedidos(){
-
+    this.router.navigate(['pedidos/completados']);
   }
 
   reporteUsuarios(){
